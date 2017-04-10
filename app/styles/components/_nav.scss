@@ -1,0 +1,24 @@
+.top-bar {
+  background: rgba(72,89,76,1);
+  background: -moz-linear-gradient(left, rgba(72,89,76,1) 0%, rgba(78,92,83,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(72,89,76,1)), color-stop(100%, rgba(78,92,83,1)));
+  background: -webkit-linear-gradient(left, rgba(72,89,76,1) 0%, rgba(78,92,83,1) 100%);
+  background: -o-linear-gradient(left, rgba(72,89,76,1) 0%, rgba(78,92,83,1) 100%);
+  background: -ms-linear-gradient(left, rgba(72,89,76,1) 0%, rgba(78,92,83,1) 100%);
+  background: linear-gradient(to right, rgba(72,89,76,1) 0%, rgba(78,92,83,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48594c', endColorstr='#4e5c53', GradientType=1 );
+  .menu {
+    background-color: transparent
+  }
+  .top-bar-title{
+    h1 {
+      margin-left: 20px;
+      font-family: 'Indie Flower', sans-serif;
+      color: white;
+    }
+  }
+  a {
+    margin-top: 10px;
+    color: white;
+  }
+}
