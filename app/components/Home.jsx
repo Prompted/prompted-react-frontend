@@ -1,4 +1,10 @@
 var React = require('react');
+var {Link, Router} = require('react-router');
+var transitionTo = Router.transitionTo;
+var Auth = require('j-toker');
+Auth.configure({
+  apiUrl: 'https://prompted-db.herokuapp.com'
+});
 
 var Home = React.createClass({
   getInitialState: function(){
@@ -11,7 +17,7 @@ var Home = React.createClass({
     this.setState({
       signUp: true,
       login: false
-    })
+    });
     console.log('hello');
   },
   handleLogin: function(){
@@ -25,17 +31,36 @@ var Home = React.createClass({
     var username = this.refs.username.value;
     var password = this.refs.password.value;
     console.log(username + ' ' + password);
+    Auth.emailSignIn({
+      email: 'newcomer.aaron@icloud.com',
+      password: 'test'
+    });
   },
   submitSignUp: function(e){
     e.preventDefault();
     var signUpUser = {
-      firstName: this.refs.firstName.value,
-      lastName: this.refs.lastName.value,
-      email: this.refs.email.value,
-      username: this.refs.username.value,
-      password: this.refs.password.value
+      // email: this.refs.email.value,
+      // password: this.refs.password.value,
+      // password_confirmation: this.refs.passwordConfirm.value,
+      // firstName: this.refs.firstName.value,
+      // lastName: this.refs.lastName.value,
+      // username: this.refs.username.value
+      email: 'newcomer.aaron@icloud.com',
+      password: 'test',
+      password_confirmation: 'test',
+      confirm_success_url: '/landing'
     }
-    console.log(signUpUser)
+    var signUpUserJson = JSON.stringify(signUpUser);
+    Auth.emailSignUp({
+      email: this.refs.email.value,
+      password: this.refs.password.value,
+      password_confirmation: this.refs.passwordConfirm.value,
+      confirm_success_url: '/landing',
+      first_name: this.refs.firstName.value,
+      last_name: this.refs.lastName.value,
+      screen_name: this.refs.username.value
+    });
+    console.log("user " + signUpUserJson)
   },
   render: function(){
     var {login, signUp} = this.state;
@@ -56,6 +81,7 @@ var Home = React.createClass({
             <input type="text" ref="email" placeholder="email"></input>
             <input type="text" ref="username" placeholder="username"></input>
             <input type="password" ref="password" placeholder="password"></input>
+            <input type="password" ref="passwordConfirm" placeholder="Confirm your password"></input>
             <button className="button-sign-up" type="submit">Sign Up</button>
           </form>
         )
@@ -75,6 +101,10 @@ var Home = React.createClass({
           <div className="float-card">
             <h1 className="logo">Prompted.</h1>
             <p>Spark and share your creative side</p>
+            <h3>
+              <Link to="/landing">Landing Page</Link>
+            </h3>
+
             {renderFormArea()}
           </div>
         </div>
